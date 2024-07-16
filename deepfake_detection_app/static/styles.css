@@ -1,0 +1,61 @@
+/* Add your CSS styles here */
+body {
+    background-image: url('/static/images/Background.jpeg'); /* Adjust the path to match the location of your image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* Add additional styles as needed */
+}
+h1 {
+    text-align: center;
+}
+
+form {
+    margin: 20px auto;
+    text-align: center;
+    padding: 10px; /* Reduce padding to make the box smaller */
+    border: 2px solid #ccc; /* Add border */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    background-color: #f9f9f9; /* Add background color */
+    max-width: 400px; /* Limit the maximum width of the box */
+    margin-left: auto; /* Center the box horizontally */
+    margin-right: auto; /* Center the box horizontally */
+}
+
+form label, form select, form input[type="file"], form button {
+    display: block;
+    margin: 10px auto;
+}
+
+/* Style the button to make it colorful */
+form button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.results {
+    margin-top: 20px;
+}
+
+.results h2 {
+    text-align: center;
+}
+
+.image-container, .video-container {
+    text-align: center;
+    margin-top: 20px;
+}

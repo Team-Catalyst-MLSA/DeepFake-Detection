@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <script>
+        function validateFile() {
+            const fileInput = document.getElementById('file');
+            const fileType = document.getElementById('file_type').value;
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('Please select a file.');
+                return false;
+            }
+
+            const fileName = file.name;
+            const fileExtension = fileName.split('.').pop().toLowerCase();
+            const allowedExtensions = {
+                'image': ['jpg', 'jpeg', 'png'],
+                'audio': ['mp3'],
+                'video': ['mp4']
+            };
+
+            if (!allowedExtensions[fileType].includes(fileExtension)) {
+                alert(`Invalid file type. Please select a ${allowedExtensions[fileType].join(', ')} file.`);
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Deepfake Detection</h1>
+    <form method="post" enctype="multipart/form-data" action="{% url 'deepfake_detection' %}" onsubmit="return validateFile()">
+        {% csrf_token %}
+        <label for="file_type" style="font-size: 1.2em;">Select file type:</label>
+        <select name="file_type" id="file_type" style="font-size: 1.2em;">
+            <option value="image">Image</option>
+            <option value="audio">Audio</option>
+            <option value="video">Video</option>
+        </select>
+        <br>
+        <input type="file" name="file" id="file" style="font-size: 1.2em;">
+        <button type="submit" style="font-size: 1.2em;">Detect Deepfake</button>
+    </form>
+
+    {% if error %}
+    <p class="error-message" style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if results %}
+    <h2>Results</h2>
+    {% if image_with_boxes %}
+    <div class="image-container">
+        <img src="data:image/jpeg;base64,{{ image_with_boxes }}" alt="Deepfake Image">
+    </div>
+    <p>Deepfake Score: {{ score }}%</p>
+    <p>Classification: {% if results.0.label == 'FAKE' %} Fake {% else %} Real {% endif %}</p>
+    {% endif %}
+    {% endif %}
+
+    {% if video_results %}
+    <h2>Video Results</h2>
+    <p>Average Deepfake Score: {{ video_results.average_fake_score }}%</p>
+    <p>Frames Analyzed: {{ video_results.frame_count }}</p>
+    <p>Deepfake Percentage: {{ deepfake_percentage }}</p>
+    {% endif %}
+
+    {% if audio_results %}
+    <h2>Audio Results</h2>
+    <ul>
+        {% for result in audio_results %}
+        <li>{{ result.label }} - Score: {{ result.score }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
