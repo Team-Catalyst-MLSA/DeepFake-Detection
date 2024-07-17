@@ -13,9 +13,5 @@ asgiref==3.8.1
 Django==5.0.7
 ffmpeg==1.4
 sqlparse==0.5.1
-<<<<<<< HEAD
-tzdata==2024.1
-=======
 tzdata==2024.1
 
->>>>>>> 937644e1ce8e975fbf6f246ca3802dc2260285fc
