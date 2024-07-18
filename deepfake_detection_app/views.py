@@ -81,14 +81,23 @@ def detect_deepfake_audio(audio_file):
     formatted_results = []
     for result in results:
         label = result['label']
+        # Adjusting the label based on your correction needs
+        if label == 'bonafide':
+            corrected_label = 'spoof'
+        elif label == 'spoof':
+            corrected_label = 'bonafide'
+        else:
+            corrected_label = label
+        
         score = result['score']
         formatted_score = "{:.2%}".format(score) if score is not None else "N/A"
-        formatted_results.append({'label': label, 'score': formatted_score})
+        formatted_results.append({'label': corrected_label, 'score': formatted_score})
 
     for formatted_result in formatted_results:
         print(f"Label: {formatted_result['label']}, Score: {formatted_result['score']}")
 
     return formatted_results
+
 
 def detect_deepfake_video(video_file):
     cap = cv2.VideoCapture(video_file.temporary_file_path())
