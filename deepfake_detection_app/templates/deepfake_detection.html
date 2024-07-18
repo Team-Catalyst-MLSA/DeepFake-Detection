@@ -58,7 +58,7 @@
     <div class="image-container">
         <img src="data:image/jpeg;base64,{{ image_with_boxes }}" alt="Deepfake Image">
     </div>
-    <p>Deepfake Score: {{ score }}%</p>
+    <p>Confidence Score: {{ score }}%</p>
     <p>Classification: {% if results.0.label == 'FAKE' %} Fake {% else %} Real {% endif %}</p>
     {% endif %}
     {% endif %}
@@ -66,7 +66,7 @@
     {% if video_results %}
     <h2>Video Results</h2>
     <p>Average Deepfake Score: {{ video_results.average_fake_score }}%</p>
-    <p>Frames Analyzed: {{ video_results.frame_count }}</p>
+    <p>Deepfake Frames Analyzed: {{ video_results.frame_count }}</p>
     <p>Deepfake Percentage: {{ deepfake_percentage }}</p>
     {% endif %}
 
