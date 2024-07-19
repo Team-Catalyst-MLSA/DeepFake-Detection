@@ -30,9 +30,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         
-      - name: Run collectstatic
-        run: python manage.py collectstatic
-        
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
@@ -69,4 +66,4 @@ jobs:
         with:
           app-name: 'deepfakedetection12'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_872FA585EA0A4C6FA09EBF5B3A674456 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FF7B0CEDFB26484E9DD4A896BF5A4700 }}
